@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间可以随意配置，建议配置成实体类接口名 -->
+<mapper namespace="com.imooc.sm.entity.Department">
+    <!-- 数据库与对象属性的一致 类型 -->
+        <resultMap id="resultMap" type="Department">
+            <id property="id" column="id" javaType="Integer"/>
+            <result property="name" column="name" javaType="String"/>
+            <result property="address" column="address" javaType="String"/>
+        </resultMap>
+    <!-- parameterType参数类型 useGeneratedKeys 告诉其id是自增-->
+    <insert id="insert" parameterType="Department" useGeneratedKeys="true">
+            insert into department(name,address) values(#{name},#{address})
+    </insert>
+    <delete id="delete" parameterType="Integer">
+        delete from department where id=#{id}
+    </delete>
+    <update id="update" parameterType="Department">
+        update department set name = #{name},address = #{address} where id = #{id}
+    </update>
+    <select id="selectByid" parameterType="Integer" resultMap="resultMap">
+        select *from department where id = #{id}
+    </select>
+    <!-- resultMap 结果返回的各大参数表明 -->
+    <select id="selectAll" resultMap="resultMap">
+        select *from department
+    </select>
+</mapper>

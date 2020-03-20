@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" version="2.4" >
+<!-- 过滤器的过滤器位置 -->
+<filter>
+  <filter-name>Encoding</filter-name>
+  <filter-class>com.imooc.sm.global.EncodingFilter</filter-class>
+  <init-param>
+    <!--设置请求响应都是UTF-8-->
+    <param-name>ENCODING</param-name>
+    <param-value>UTF-8</param-value>
+  </init-param>
+</filter>
+  <!--应用于所有请求响应程序-->
+<filter-mapping>
+  <filter-name>Encoding</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+    <!-- 登录过滤器的过滤器位置 -->
+    <filter>
+        <filter-name>Login</filter-name>
+        <filter-class>com.imooc.sm.global.LoginFillter</filter-class>
+    </filter>
+    <!--应用于所有请求响应程序-->
+    <filter-mapping>
+        <filter-name>Login</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Login</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+  <!-- 配置核心控制器；所有的web程序.do后缀的都要通过核心控制器 -->
+  <servlet>
+    <servlet-name>Global</servlet-name>
+    <servlet-class>com.imooc.sm.global.DlspatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Global</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+</web-app>
+        
